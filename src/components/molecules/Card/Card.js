@@ -64,9 +64,10 @@ class Card extends React.Component {
 
       this.setState( {allQuotes} )
 
-      const randomlySelectedQuotes = singleQuote[Math.floor(Math.random() * allQuotes.length)]
-      console.log(randomlySelectedQuotes)
-   
+      const getRandomlySelectedQuotes = () => {
+        console.log(singleQuote[Math.floor(Math.random() * allQuotes.length)])
+      }
+      
 
       })
       .catch((error) => {
@@ -87,7 +88,7 @@ class Card extends React.Component {
         </CenterWrapper>
         <ButtonWrapper>
           <Button prev> prev</Button>
-          <Button onClick={this.fetchQuote}> next </Button>
+          <Button > next </Button>
         </ButtonWrapper>
       </StyledWrapper>
     );

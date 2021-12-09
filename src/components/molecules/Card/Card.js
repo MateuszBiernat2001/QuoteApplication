@@ -65,11 +65,9 @@ class Card extends React.Component {
       this.setState( {allQuotes} )
 
       const randomlySelectedQuotes = singleQuote[Math.floor(Math.random() * allQuotes.length)]
+      console.log(randomlySelectedQuotes)
+   
 
-      this.setState = ( {randomlySelectedQuotes} )
-
-      console.log(this.setState)
-      console.log(quoteArr)
       })
       .catch((error) => {
         console.log(error);
@@ -85,11 +83,11 @@ class Card extends React.Component {
           <Heading>Draw a quote</Heading>
         </InnerWrapper>
         <CenterWrapper>
-          <Paragraph>{this.randomlySelectedQuotes}</Paragraph>
+          <Paragraph>{this.state.randomlySelectedQuotes}</Paragraph>
         </CenterWrapper>
         <ButtonWrapper>
           <Button prev> prev</Button>
-          <Button> next </Button>
+          <Button onClick={this.fetchQuote}> next </Button>
         </ButtonWrapper>
       </StyledWrapper>
     );

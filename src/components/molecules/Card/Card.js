@@ -63,11 +63,14 @@ class Card extends React.Component {
       const allQuotes = singleQuote;
       console.log(allQuotes)
 
+      this.setState( {allQuotes} )
+
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
 
 
 

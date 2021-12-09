@@ -72,11 +72,12 @@ class Card extends React.Component {
   }
 
 
-
    getRandomlySelectedQuotes = () => {
     const myQuotesArr = [];
     const randomlySelectedQuotes = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
 
+    myQuotesArr.push(randomlySelectedQuotes)
+    console.log(myQuotesArr)
 
     this.setState( {randomlySelectedQuotes} )
   }
@@ -85,9 +86,6 @@ class Card extends React.Component {
     console.log('ok')
   }
 
-
-
-  
 
   render() {
     return (

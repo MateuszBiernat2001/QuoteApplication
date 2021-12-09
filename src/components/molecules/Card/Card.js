@@ -76,8 +76,6 @@ class Card extends React.Component {
     const randomlySelectedQuotes = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
 
     this.setState(state=>({randomlySelectedQuotes:[...state.randomlySelectedQuotes, randomlySelectedQuotes]}))
-
-    this.setState( {randomlySelectedQuotes} )
   }
 
 

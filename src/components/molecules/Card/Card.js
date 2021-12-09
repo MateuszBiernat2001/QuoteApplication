@@ -47,7 +47,8 @@ const CenterWrapper = styled.div`
 
 class Card extends React.Component {
   state = {
-    quote: '',
+    allQuotes: '',
+    randomlySelectedQuotes : '',
   }
 
   componentDidMount() {
@@ -56,14 +57,11 @@ class Card extends React.Component {
 
   fetchQuote = () => {
     axios.get('https://gist.githubusercontent.com/natebass/b0a548425a73bdf8ea5c618149fe1fce/raw/f4231cd5961f026264bb6bb3a6c41671b044f1f4/quotes.json')
-      .then((response) => {
-        const quoteArr = (response.data)
-        const singleQuote = quoteArr.map(el => el.quote)
-
-        const randomQuote = singleQuote[Math.floor(Math.random() * singleQuote.length)]
-        const  quote  = randomQuote;
-        
-        this.setState({ quote });
+    .then((response) => {
+      const quoteArr = (response.data)
+      const singleQuote = quoteArr.map(el => el.quote)
+      const allQuotes = singleQuote;
+      console.log(allQuotes)
 
       })
       .catch((error) => {
@@ -72,9 +70,6 @@ class Card extends React.Component {
   }
 
 
-  backToPrevQuote = () => {
-    console.log('ok')
-  }
 
   render() {
     return (
@@ -95,4 +90,3 @@ class Card extends React.Component {
 }
 
 export default Card;
-

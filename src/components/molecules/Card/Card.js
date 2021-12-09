@@ -61,18 +61,21 @@ class Card extends React.Component {
       const quoteArr = (response.data)
       const singleQuote = quoteArr.map(el => el.quote)
       const allQuotes = singleQuote;
-      console.log(allQuotes)
 
       this.setState( {allQuotes} )
 
+      const randomlySelectedQuotes = singleQuote[Math.floor(Math.random() * singleQuote.length)]
+
+      this.setState = ( {randomlySelectedQuotes} )
+
+      console.log(this.setState)
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-
-
+  
 
   render() {
     return (
@@ -84,8 +87,8 @@ class Card extends React.Component {
           <Paragraph>{this.state.quote}</Paragraph>
         </CenterWrapper>
         <ButtonWrapper>
-          <Button prev onClick = {this.backToPrevQuote}> prev</Button>
-          <Button onClick={this.fetchQuote}> next </Button>
+          <Button prev> prev</Button>
+          <Button> next </Button>
         </ButtonWrapper>
       </StyledWrapper>
     );

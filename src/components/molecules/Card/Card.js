@@ -47,10 +47,9 @@ const CenterWrapper = styled.div`
 
 class Card extends React.Component {
   state = {
-    allQuotes: '',
-    randomlySelectedQuotes : '',
+    allQuotes: [],
+    randomlySelectedQuotes : [],
   }
-
   componentDidMount() {
     this.fetchQuote();
   }

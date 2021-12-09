@@ -47,8 +47,9 @@ const CenterWrapper = styled.div`
 
 class Card extends React.Component {
   state = {
-    allQuotes: [],
+    allQuotes: '',
     randomlySelectedQuotes : [],
+    selectedQuote : '',
   }
   componentDidMount() {
     this.fetchQuote();
@@ -71,7 +72,7 @@ class Card extends React.Component {
   }
 
 
-   getRandomlySelectedQuotes = () => {
+  getRandomlySelectedQuotes = () => {
     const myQuotesArr = [];
     const randomlySelectedQuotes = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
 
@@ -81,9 +82,7 @@ class Card extends React.Component {
     this.setState( {randomlySelectedQuotes} )
   }
 
-  getPrevQuotes = () => {
-    console.log('ok')
-  }
+
 
 
   render() {

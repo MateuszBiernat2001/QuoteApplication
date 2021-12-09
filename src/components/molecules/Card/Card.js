@@ -64,16 +64,27 @@ class Card extends React.Component {
 
       this.setState( {allQuotes} )
 
-      const getRandomlySelectedQuotes = () => {
-        console.log(singleQuote[Math.floor(Math.random() * allQuotes.length)])
-      }
-      
-
+    
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+
+
+   getRandomlySelectedQuotes = () => {
+    const randomQuotes = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
+    console.log(randomQuotes)
+
+    this.setState( {randomQuotes} )
+  }
+
+  getPrevQuotes = () => {
+    console.log('poprzedni')
+  }
+
+
 
   
 
@@ -84,11 +95,11 @@ class Card extends React.Component {
           <Heading>Draw a quote</Heading>
         </InnerWrapper>
         <CenterWrapper>
-          <Paragraph>{this.state.randomlySelectedQuotes}</Paragraph>
+          <Paragraph>{this.randomlySelectedQuotes}</Paragraph>
         </CenterWrapper>
         <ButtonWrapper>
-          <Button prev> prev</Button>
-          <Button > next </Button>
+          <Button prev onClick={this.getPrevQuotes}> prev</Button>
+          <Button onClick={this.getRandomlySelectedQuotes}> next </Button>
         </ButtonWrapper>
       </StyledWrapper>
     );

@@ -74,11 +74,13 @@ class Card extends React.Component {
     this.setState(state=>(
         {
           randomlySelectedQuotes: [...state.randomlySelectedQuotes, randomlySelectedQuote],
-          selectedQuote: [randomlySelectedQuote]
+          selectedQuote: [randomlySelectedQuote.length -1]
         }
       ),
     )
   }
+
+  
 
 
   render() {
@@ -91,7 +93,7 @@ class Card extends React.Component {
           <Paragraph>{this.state.selectedQuote}</Paragraph>
         </CenterWrapper>
         <ButtonWrapper>
-          <Button prev onClick={this.getPrevQuotes}> prev</Button>
+          <Button prev onClick={''}> prev</Button>
           <Button onClick={this.randomlySelectedQuotes}> next </Button>
         </ButtonWrapper>
       </StyledWrapper>

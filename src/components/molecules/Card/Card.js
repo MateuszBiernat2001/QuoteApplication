@@ -31,8 +31,6 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: flex-end;
   margin: 15px;
-  background-color: white;
-
 `
 const CenterWrapper = styled.div`
   display: flex;
@@ -59,8 +57,8 @@ class Card extends React.Component {
     axios.get('https://gist.githubusercontent.com/natebass/b0a548425a73bdf8ea5c618149fe1fce/raw/f4231cd5961f026264bb6bb3a6c41671b044f1f4/quotes.json')
     .then((response) => {
       const quoteArr = (response.data)
-      const singleQuote = quoteArr.map(el => el.quote)
-      const allQuotes = singleQuote;
+      const quotesArray = quoteArr.map(el => el.quote)
+      const allQuotes = quotesArray;
 
       this.setState( {allQuotes} )
 
@@ -72,10 +70,14 @@ class Card extends React.Component {
   }
 
 
-  getRandomlySelectedQuotes = () => {
-    const randomlySelectedQuotes = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
+  randomlySelectedQuotes = () => {
+    const randomlySelectedQuote = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
 
-    this.setState(state=>({randomlySelectedQuotes:[...state.randomlySelectedQuotes, randomlySelectedQuotes]}))
+    this.setState(state=>({randomlySelectedQuotes:[...state.randomlySelectedQuotes, randomlySelectedQuote]}))
+    console.log(this.state.randomlySelectedQuotes)
+
+    const selectedValue = this.randomlySelectedQuotes;
+    console.log(selectedValue)
   }
 
 
@@ -86,11 +88,11 @@ class Card extends React.Component {
           <Heading>Draw a quote</Heading>
         </InnerWrapper>
         <CenterWrapper>
-          <Paragraph>{this.state.randomlySelectedQuotes}</Paragraph>
+          <Paragraph>{this.state.selectedValue}</Paragraph>
         </CenterWrapper>
         <ButtonWrapper>
           <Button prev onClick={this.getPrevQuotes}> prev</Button>
-          <Button onClick={this.getRandomlySelectedQuotes}> next </Button>
+          <Button onClick={this.randomlySelectedQuotes}> next </Button>
         </ButtonWrapper>
       </StyledWrapper>
     );

@@ -43,58 +43,75 @@ const CenterWrapper = styled.div`
 `;
 
 
+
 class Card extends React.Component {
   state = {
     allQuotes: '',
-    randomlySelectedQuotes : [],
-    selectedQuote : ''
+    randomlySelectedQuotes: [],
+    selectedQuote: null
   }
   componentDidMount() {
-    this.fetchQuote();
+    this.fetchQuotes();
   }
 
-  fetchQuote = () => {
+  fetchQuotes = () => {
     axios.get('https://gist.githubusercontent.com/natebass/b0a548425a73bdf8ea5c618149fe1fce/raw/f4231cd5961f026264bb6bb3a6c41671b044f1f4/quotes.json')
     .then((response) => {
-      const quoteArr = (response.data)
-      const quotesArray = quoteArr.map(el => el.quote)
-      const allQuotes = quotesArray;
+      const allQuotes = response.data.map(el => el.quote);
+      const randomQuote = this.getRandomQuote(allQuotes);
 
-      this.setState( {allQuotes} )
-
-    
-      })
-      .catch((error) => {
-        console.log(error);
+      this.setState({ 
+        allQuotes,
+        randomlySelectedQuotes: [randomQuote],
+        selectedQuote: 0,
       });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
-  randomlySelectedQuotes = () => {
-    const randomlySelectedQuote = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
+  getRandomQuote = (quotes) => {
+    return quotes[Math.floor(Math.random() * quotes.length)];
+  }
+
+  getNextQuote = () => {
+    const randomlySelectedQuote = this.getRandomQuote(this.state.allQuotes);
+
     this.setState(state=>(
         {
           randomlySelectedQuotes: [...state.randomlySelectedQuotes, randomlySelectedQuote],
-          selectedQuote: [randomlySelectedQuote.length -1]
+          selectedQuote: state.randomlySelectedQuotes.length // show last quote
         }
       ),
     )
   }
 
-  
+  getPrevQuote = () => {
+    const { selectedQuote } = this.state;
 
+    if (selectedQuote && selectedQuote > 0) {
+      this.setState(state => ({
+        selectedQuote: state.selectedQuote - 1
+      }))
+    }
+  }
 
   render() {
+    const { randomlySelectedQuotes, selectedQuote } = this.state;
+    const isQuoteSelected = selectedQuote !== null;
+
     return (
       <StyledWrapper>
         <InnerWrapper>
           <Heading>Draw a quote</Heading>
         </InnerWrapper>
         <CenterWrapper>
-          <Paragraph>{this.state.selectedQuote}</Paragraph>
+          {isQuoteSelected && <Paragraph>{randomlySelectedQuotes[selectedQuote]}</Paragraph>}
         </CenterWrapper>
         <ButtonWrapper>
-          <Button prev onClick={''}> prev</Button>
-          <Button onClick={this.randomlySelectedQuotes}> next </Button>
+          <Button prev onClick={this.getPrevQuote}>Show previous</Button>
+          <Button onClick={this.getNextQuote}>Draw a new quote</Button>
         </ButtonWrapper>
       </StyledWrapper>
     );

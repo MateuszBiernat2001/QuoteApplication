@@ -47,7 +47,7 @@ class Card extends React.Component {
   state = {
     allQuotes: '',
     randomlySelectedQuotes : [],
-    selectedQuote : '',
+    selectedQuote : this.randomlySelectedQuotes - 1,
   }
   componentDidMount() {
     this.fetchQuote();
@@ -74,10 +74,6 @@ class Card extends React.Component {
     const randomlySelectedQuote = this.state.allQuotes[Math.floor(Math.random() * this.state.allQuotes.length)];
 
     this.setState(state=>({randomlySelectedQuotes:[...state.randomlySelectedQuotes, randomlySelectedQuote]}))
-    console.log(this.state.randomlySelectedQuotes)
-
-    const selectedValue = this.randomlySelectedQuotes;
-    console.log(selectedValue)
   }
 
 
@@ -88,7 +84,7 @@ class Card extends React.Component {
           <Heading>Draw a quote</Heading>
         </InnerWrapper>
         <CenterWrapper>
-          <Paragraph>{this.state.selectedValue}</Paragraph>
+          <Paragraph>{this.state.selectedQuote}</Paragraph>
         </CenterWrapper>
         <ButtonWrapper>
           <Button prev onClick={this.getPrevQuotes}> prev</Button>
